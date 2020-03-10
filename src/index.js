@@ -43,7 +43,7 @@ app.get('/users', async (req,res) => {
         const users = await User.find({})
         res.status(200).send(users)
     }catch(e){
-        res.status(404).send()
+        res.status(404).send(e)
     }
 })
 
@@ -71,7 +71,7 @@ app.get('/users/:id', async (req,res) => {
         }
         res.status(200).send(user)
     }catch(e){
-        res.status(500).send()
+        res.status(500).send(e)
     }
 })
 
@@ -92,7 +92,7 @@ app.post('/tasks', async ( req, res ) => {
         await task.save()
         res.status(201).send(task)
     }catch(e){
-        res.status(404).send()
+        res.status(404).send(e)
     }
 })
 
@@ -114,7 +114,7 @@ app.get('/tasks', async (req, res) => {
         res.status(200).send(tasks)
         
     }catch(e){
-        res.status(500).send()
+        res.status(500).send(e)
     }
 })
 
@@ -141,7 +141,7 @@ app.get('/tasks/:id', async (req,res) => {
         }
         res.status(200).send(task)
     }catch(e){
-        res.status(500).send()
+        res.status(500).send(e)
     }
 })
 

@@ -96,12 +96,26 @@ app.post('/tasks', async ( req, res ) => {
     }
 })
 
-app.get('/tasks', (req,res) => {
-    Task.find({}).then((tasks) => {
-        res.send(tasks)
-    }).catch((e) => {
+// app.get('/tasks', (req,res) => {
+//     Task.find({}).then((tasks) => {
+//         res.send(tasks)
+//     }).catch((e) => {
+//         res.status(500).send()
+//     })
+// })
+
+app.get('/tasks', async (req, res) => {
+    try{
+
+        const tasks = await Task.find({})
+        if(!tasks){
+            return res.status(404).send()
+        }
+        res.status(200).send(tasks)
+        
+    }catch(e){
         res.status(500).send()
-    })
+    }
 })
 
 app.get('/tasks/:id', (req,res) => {

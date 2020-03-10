@@ -76,13 +76,24 @@ app.get('/users/:id', async (req,res) => {
 })
 
 
-app.post('/tasks',(req,res)=>{
+// app.post('/tasks',(req,res)=>{
+//     const task = new Task(req.body)
+//     task.save().then(()=>{
+//         res.status(201).send(task)
+//     }).catch((e)=>{
+//         res.status(400).send(e)
+//     })
+// })
+
+app.post('/tasks', async ( req, res ) => {
     const task = new Task(req.body)
-    task.save().then(()=>{
+
+    try{
+        await task.save()
         res.status(201).send(task)
-    }).catch((e)=>{
-        res.status(400).send(e)
-    })
+    }catch(e){
+        res.status(404).send()
+    }
 })
 
 app.get('/tasks', (req,res) => {

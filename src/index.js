@@ -8,13 +8,26 @@ const port = process.env.PORT || 3000
 
 app.use(express.json())
 
-app.post('/users',(req,res)=>{
+// app.post('/users',(req,res)=>{
+//     const user = new User(req.body)
+//     user.save().then(()=>{
+//         res.status(201).send(user)
+//     }).catch((error)=>{
+//         res.status(400).send(error)
+//     })
+// })
+
+app.post('/users', async (req,res) => {
     const user = new User(req.body)
-    user.save().then(()=>{
+
+    try{
+
+        await user.save()
         res.status(201).send(user)
-    }).catch((error)=>{
-        res.status(400).send(error)
-    })
+
+    }catch(e){
+        res.status(400).send(e)
+    }
 })
 
 app.get('/users',(req,res) => {

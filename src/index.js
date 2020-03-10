@@ -30,12 +30,21 @@ app.post('/users', async (req,res) => {
     }
 })
 
-app.get('/users',(req,res) => {
-    User.find({}).then((users)=>{
-        res.send(users)
-    }).catch((e)=>{
-        res.status(500).send()
-    })
+// app.get('/users',(req,res) => {
+//     User.find({}).then((users)=>{
+//         res.send(users)
+//     }).catch((e)=>{
+//         res.status(500).send()
+//     })
+// })
+
+app.get('/users', async (req,res) => {
+    try{
+        const users = await User.find({})
+        res.status(200).send(users)
+    }catch(e){
+        res.status(404).send()
+    }
 })
 
 app.get('/users/:id', (req, res) => {

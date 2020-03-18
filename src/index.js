@@ -16,6 +16,17 @@ app.listen(port,()=>{
     console.log('Serves is up on port ' + port)
 })
 
+const jwt = require('jsonwebtoken')
+
+const myFunc = async () =>{
+    const token = jwt.sign({ _id : '1234' },'thisispranavsapp', { expiresIn : '7 days'})
+    console.log(token)
+
+    const data = jwt.verify(token,'thisispranavsapp')
+    console.log(data)
+}
+
+myFunc()
 // CODE WITHOUD ASYNC/AWAIT ONLY WORKS WITH PROMISE CHAINING. ABOVE CODE IS BETTER IN TERMS OF READABILITY
 // app.post('/users',(req,res)=>{
 //     const user = new User(req.body)

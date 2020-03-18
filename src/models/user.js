@@ -43,6 +43,23 @@ const userSchema = new mongoose.Schema({
     }
 })
 
+userSchema.statics.loginUser = async(email,password) =>{
+    const user = await User.findOne({email}) //shorthand syntax for email : email cause both argument have same name
+
+    if(!user){
+        throw new Error('Unable to login')
+    }
+
+    const isMatch = await bcrypt.compare(password, user.password)
+
+    if(!isMatch){
+        throw new Error('Unable to login')
+    }
+
+    return user
+}
+
+//Hash the plain text password before saving/after updating password
 userSchema.pre('save', async function(next) {
     const user = this
 

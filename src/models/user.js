@@ -43,6 +43,8 @@ const userSchema = new mongoose.Schema({
             }
         }
     },
+    //adding tokens as an array so that user can login/logout from multiple accounts and can manage
+    //those seasons separately. 
     tokens : [{
         token :{
             type : String,
@@ -54,6 +56,8 @@ const userSchema = new mongoose.Schema({
 userSchema.methods.generateAuthToken = async function(){
     const user = this
     const token = jwt.sign({ _id : user._id.toString() } , 'thisispranavsapp')
+    user.tokens = user.tokens.concat({ token}) //shorthand syntax for token : token
+    await user.save()
     return token
 }
 

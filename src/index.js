@@ -17,11 +17,7 @@ const taskRouter = require('./routers/task')
 // })
 
 app.use((req,res,next) =>{
-    if(req){
-        res.status(503).send('Site temporarily under maintainance. Please try back again')
-    }else{
-        next()
-    }
+        res.status(503).send('Site temporarily under maintainance. Please try back again later')
 })
 
 app.use(express.json())

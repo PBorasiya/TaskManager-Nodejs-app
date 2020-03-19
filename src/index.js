@@ -8,18 +8,6 @@ const port = process.env.PORT || 3000
 const userRouter = require('./routers/user')
 const taskRouter = require('./routers/task')
 
-// app.use((req,res,next) =>{
-//     if(req.method =='GET'){
-//         res.send('GET requests are disabled for time being')
-//     }else{
-//         next()
-//     }
-// })
-
-app.use((req,res,next) =>{
-        res.status(503).send('Site temporarily under maintainance. Please try back again later')
-})
-
 app.use(express.json())
 app.use(userRouter)
 app.use(taskRouter)

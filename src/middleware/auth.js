@@ -1,18 +1,23 @@
+const jwt = require('jsonwebtoken')
+const USer = require('../models/user')
+
 const auth = async (req, res, next) =>{
-    console.log('testing for middleware')
-    next()
+    
+    try{
+        const token = req.header('Authorization').replace('Bearer ','')
+        const decoded = jwt.verify(token,'thisispranavsapp')
+        const user = await USer.findOne({_id: decoded._id , 'tokens.token' : token })
+
+        if(!user){
+            throw new Error()
+        }
+
+        req.user = user
+        next()
+    }catch(e){
+        res.status(401).send({ error : 'please authenticate'})
+    }
+    
 }
-
-// app.use((req,res,next) =>{
-//     if(req.method =='GET'){
-//         res.send('GET requests are disabled for time being')
-//     }else{
-//         next()
-//     }
-// })
-
-// app.use((req,res,next) =>{
-//     res.status(503).send('Site temporarily under maintainance. Please try back again later')
-// })
 
 module.exports = auth

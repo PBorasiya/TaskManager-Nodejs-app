@@ -79,6 +79,8 @@ router.patch('/users/me', auth , async (req, res) =>{
         return res.status(400).send({ error : 'Invalid update! property does not exist'})
     }
     try{
+        //commented below code because auth middleware takes care of finding the user and attaching
+        //user as property on req object as req.user while authanticating the user action
         //const user = await User.findByIdAndUpdate(req.params.id, req.body , { new : true, runValidators : true})
         
         //const user = await User.findById(req.params.id)
@@ -99,8 +101,8 @@ router.patch('/users/me', auth , async (req, res) =>{
 
 router.delete('/users/me', auth , async (req, res) =>{
     try{
-        //commented all below code while refactoring cause auth middleware takes care of finding
-        //and authorising the user
+        //commented below code because auth middleware takes care of finding the user and attaching
+        //user as property on req object as req.user while authanticating the user action
         // const user = await User.findByIdAndDelete(req.user._id)
 
         // if(!user){

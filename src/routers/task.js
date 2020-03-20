@@ -19,6 +19,7 @@ router.post('/tasks', auth , async ( req, res ) => {
 
 router.get('/tasks', auth ,async (req, res) => {
     try{
+        //binds and populates logged in users tasks virtual tasks property 
         await req.user.populate('tasks').execPopulate()
         res.status(200).send(req.user.tasks)
         

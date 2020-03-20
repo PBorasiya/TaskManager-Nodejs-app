@@ -61,6 +61,16 @@ userSchema.methods.generateAuthToken = async function(){
     return token
 }
 
+userSchema.methods.getPublicProfile =  function(){
+    const user = this
+    const userObject = user.toObject()
+
+    delete userObject.password
+    delete userObject.tokens
+
+    return userObject
+}
+
 userSchema.statics.loginUser = async(email,password) =>{
     const user = await User.findOne({email}) //shorthand syntax for email : email cause both argument have same name
 

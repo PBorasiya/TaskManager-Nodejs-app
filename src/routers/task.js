@@ -29,7 +29,11 @@ router.get('/tasks', auth ,async (req, res) => {
         //populate function can be customized to help set querystring attributes
         await req.user.populate({
             path: 'tasks',
-            match
+            match,
+            options :{
+                limit : parseInt(req.query.limit),
+                skip : parseInt(req.query.skip)
+            }
         }).execPopulate()
         res.status(200).send(req.user.tasks)
         

@@ -53,6 +53,8 @@ const userSchema = new mongoose.Schema({
         }
     }]
 },{
+    //this additional option in schema lets you provide created at and updated at 
+    //timestamps to provide more details about the data
     timestamps : true
 })
 

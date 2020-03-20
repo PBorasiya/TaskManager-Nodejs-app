@@ -81,18 +81,17 @@ router.patch('/users/me', auth , async (req, res) =>{
     try{
         //commented below code because auth middleware takes care of finding the user and attaching
         //user as property on req object as req.user while authanticating the user action
-        //const user = await User.findByIdAndUpdate(req.params.id, req.body , { new : true, runValidators : true})
-        
+        //const user = await User.findByIdAndUpdate(req.params.id, req.body ,
+        // { new : true, runValidators : true})
         //const user = await User.findById(req.params.id)
 
         updates.forEach((update) => req.user[update] = req.body[update])
+        
+        // if(!req.user){
+        //     return res.status(404).send()
+        // }
 
         await req.user.save()
-        
-        if(!req.user){
-            return res.status(404).send()
-        }
-
         res.status(200).send(req.user)
     }catch(e){
         res.status(400).send(e)

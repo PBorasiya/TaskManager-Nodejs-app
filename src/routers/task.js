@@ -31,8 +31,9 @@ router.get('/tasks', auth ,async (req, res) => {
             path: 'tasks',
             match,
             options :{
-                limit : parseInt(req.query.limit),
-                skip : parseInt(req.query.skip)
+                limit : parseInt(req.query.limit),  //number of document per page
+                skip : parseInt(req.query.skip) //number of documents to skip. basically skipping to page n
+                //after skipping skip 
             }
         }).execPopulate()
         res.status(200).send(req.user.tasks)

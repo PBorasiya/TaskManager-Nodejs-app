@@ -3,6 +3,7 @@ const validator = require('validator')
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 
+
 const userSchema = new mongoose.Schema({ 
     name : {
         type :String,
@@ -51,6 +52,12 @@ const userSchema = new mongoose.Schema({
             required : true
         }
     }]
+})
+
+userSchema.virtual('tasks' , {
+    ref : 'Task',
+    localField : '_id',
+    foreignField : 'owner'
 })
 
 userSchema.methods.generateAuthToken = async function(){

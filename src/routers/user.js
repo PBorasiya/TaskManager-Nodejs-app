@@ -108,6 +108,7 @@ const avatar = new multer({
         fileSize : 1000000
     },
     fileFilter(req, file, cb){
+        //regular expression or regex
         if(!file.originalname.match(/\.(jpg|jpeg|png)$/)){
             return cb(new Error('Please follow image rules'))
         }

@@ -19,21 +19,27 @@ router.post('/tasks', auth , async ( req, res ) => {
 
 router.get('/tasks', auth ,async (req, res) => {
     const match = {}
-
+    const sort = {}
     if(req.query.completed){
         match.completed = req.query.completed === 'true'
     }
 
+    if(req.query.sortBy){
+        const parts = req.query.sortBy.split(':')
+        sort[parts[0]] = parts[1] === 'desc' ? -1 : 1
+    }
     try{
         //binds and populates logged in users tasks virtual tasks property 
         //populate function can be customized to help set querystring attributes
         await req.user.populate({
             path: 'tasks',
             match,
-            options :{
+            options: {
                 limit : parseInt(req.query.limit),  //number of document per page
-                skip : parseInt(req.query.skip) //number of documents to skip. basically skipping to page n
-                //after skipping skip 
+                skip : parseInt(req.query.skip), //number of documents to skip. basically skipping to page n
+                //after skipping skip   
+                //for sorting the incoming response documents
+                sort
             }
         }).execPopulate()
         res.status(200).send(req.user.tasks)

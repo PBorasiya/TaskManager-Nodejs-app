@@ -51,7 +51,12 @@ const userSchema = new mongoose.Schema({
             type : String,
             required : true
         }
-    }]
+    }],
+    //for storing profile pictures, in form of buffer of binary data of the image
+    // in database along with user data
+    avatar : {
+        type : Buffer
+    }
 },{
     //this additional option in schema lets you provide created at and updated at 
     //timestamps to provide more details about the data

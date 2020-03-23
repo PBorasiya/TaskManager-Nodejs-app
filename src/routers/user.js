@@ -110,14 +110,16 @@ const avatar = new multer({
     fileFilter(req, file, cb){
         //regular expression or regex
         if(!file.originalname.match(/\.(jpg|jpeg|png)$/)){
-            return cb(new Error('Please follow image rules'))
+            return cb(new Error('Please upload an image image rules'))
         }
         cb(undefined,true)
     }
 })
 
-router.post('/users/me/avatar', avatar.single('avatar') ,async(req,res)=>{
+router.post('/users/me/avatar', avatar.single('avatar') ,(req,res)=>{
     res.send()
+},(error,req,res,next) =>{
+    res.status(400).send({ error : error.message})
 })
 
 module.exports = router

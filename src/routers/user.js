@@ -123,4 +123,12 @@ router.post('/users/me/avatar', auth,  avatar.single('avatar') , async (req,res)
     res.status(400).send({ error : error.message})
 })
 
+router.delete('/users/me/avatar' , auth , async (req, res) => {
+    req.user.avatar = undefined
+    await req.user.save()
+    res.status(200).send()
+}),((error,req,res,next)=>{
+    res.status(400).send({ error : error.message })
+})
+
 module.exports = router

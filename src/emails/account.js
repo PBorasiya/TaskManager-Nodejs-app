@@ -13,6 +13,16 @@ const sendWelcomeEmail = (email, name) => {
     })
 }
 
+const sendGoodbyeEmail = (email, name) => {
+    sgMail.send({
+        to : email,
+        from : 'borasiyapranav@gmail.com',
+        subject : 'Sad to see you go',
+        text : `Welcome to the app, ${name}. We are sad to see you go!!`
+    })
+}
+
 module.exports = {
-    sendWelcomeEmail //ES6 shorthand syntax
+    sendWelcomeEmail, //ES6 shorthand syntax
+    sendGoodbyeEmail
 }

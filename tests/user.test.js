@@ -50,3 +50,10 @@ test('Should get profile for a user' , async () => {
         .send()
         .expect(200)
 })
+
+test('should not get profile for anauthenticated user', async()=>{
+    await request(app)
+        .get('/users/me')
+        .send()
+        .expect(401)
+})

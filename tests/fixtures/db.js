@@ -61,5 +61,7 @@ const setupDatabase = async () => {
 module.exports = {
     setupDatabase,
     userOneId,
-    userOne
+    userOne,
+    userTwo,
+    userTwoId
 }

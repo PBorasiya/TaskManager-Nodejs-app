@@ -16,7 +16,6 @@ const userOne = {
 }
 
 const userTwoId = new mongoose.Types.ObjectId()
-
 const userTwo = {
     _id : userTwoId,
     name : 'UserTwo',
